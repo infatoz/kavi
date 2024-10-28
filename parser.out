@@ -1,0 +1,717 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    EXCLAMATION
+    NEWLINE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement
+Rule 2     program -> statement program
+Rule 3     statement -> PRINT LPAREN STRING RPAREN SEMICOLON
+Rule 4     statement -> IDENTIFIER EQUAL expression SEMICOLON
+Rule 5     statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+Rule 6     statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+Rule 7     expression -> expression PLUS term
+Rule 8     expression -> expression MINUS term
+Rule 9     expression -> term
+Rule 10    expression -> TRUE
+Rule 11    expression -> FALSE
+Rule 12    expression -> expression GREATER expression
+Rule 13    expression -> expression LESS expression
+Rule 14    term -> term MULTIPLY factor
+Rule 15    term -> term DIVIDE factor
+Rule 16    term -> factor
+Rule 17    factor -> NUMBER
+Rule 18    factor -> IDENTIFIER
+
+Terminals, with rules where they appear
+
+DIVIDE               : 15
+ELSE                 : 5
+EQUAL                : 4
+EXCLAMATION          : 
+FALSE                : 11
+GREATER              : 12
+IDENTIFIER           : 4 18
+IF                   : 5
+LBRACE               : 5 5 6
+LESS                 : 13
+LOOP                 : 6
+LPAREN               : 3 5 6
+MINUS                : 8
+MULTIPLY             : 14
+NEWLINE              : 
+NUMBER               : 6 17
+PLUS                 : 7
+PRINT                : 3
+RBRACE               : 5 5 6
+RPAREN               : 3 5 6
+SEMICOLON            : 3 4
+STRING               : 3
+TRUE                 : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 4 5 7 8 12 12 13 13
+factor               : 14 15 16
+program              : 2 5 5 6 0
+statement            : 1 2
+term                 : 7 8 9 14 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement
+    (2) program -> . statement program
+    (3) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (4) statement -> . IDENTIFIER EQUAL expression SEMICOLON
+    (5) statement -> . IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (6) statement -> . LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    PRINT           shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    IF              shift and go to state 5
+    LOOP            shift and go to state 6
+
+    program                        shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement .
+    (2) program -> statement . program
+    (1) program -> . statement
+    (2) program -> . statement program
+    (3) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (4) statement -> . IDENTIFIER EQUAL expression SEMICOLON
+    (5) statement -> . IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (6) statement -> . LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    $end            reduce using rule 1 (program -> statement .)
+    RBRACE          reduce using rule 1 (program -> statement .)
+    PRINT           shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    IF              shift and go to state 5
+    LOOP            shift and go to state 6
+
+    statement                      shift and go to state 2
+    program                        shift and go to state 7
+
+state 3
+
+    (3) statement -> PRINT . LPAREN STRING RPAREN SEMICOLON
+
+    LPAREN          shift and go to state 8
+
+
+state 4
+
+    (4) statement -> IDENTIFIER . EQUAL expression SEMICOLON
+
+    EQUAL           shift and go to state 9
+
+
+state 5
+
+    (5) statement -> IF . LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+
+    LPAREN          shift and go to state 10
+
+
+state 6
+
+    (6) statement -> LOOP . LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    LPAREN          shift and go to state 11
+
+
+state 7
+
+    (2) program -> statement program .
+
+    $end            reduce using rule 2 (program -> statement program .)
+    RBRACE          reduce using rule 2 (program -> statement program .)
+
+
+state 8
+
+    (3) statement -> PRINT LPAREN . STRING RPAREN SEMICOLON
+
+    STRING          shift and go to state 12
+
+
+state 9
+
+    (4) statement -> IDENTIFIER EQUAL . expression SEMICOLON
+    (7) expression -> . expression PLUS term
+    (8) expression -> . expression MINUS term
+    (9) expression -> . term
+    (10) expression -> . TRUE
+    (11) expression -> . FALSE
+    (12) expression -> . expression GREATER expression
+    (13) expression -> . expression LESS expression
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    TRUE            shift and go to state 16
+    FALSE           shift and go to state 17
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 14
+    term                           shift and go to state 15
+    factor                         shift and go to state 18
+
+state 10
+
+    (5) statement -> IF LPAREN . expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (7) expression -> . expression PLUS term
+    (8) expression -> . expression MINUS term
+    (9) expression -> . term
+    (10) expression -> . TRUE
+    (11) expression -> . FALSE
+    (12) expression -> . expression GREATER expression
+    (13) expression -> . expression LESS expression
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    TRUE            shift and go to state 16
+    FALSE           shift and go to state 17
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 20
+    term                           shift and go to state 15
+    factor                         shift and go to state 18
+
+state 11
+
+    (6) statement -> LOOP LPAREN . NUMBER RPAREN LBRACE program RBRACE
+
+    NUMBER          shift and go to state 21
+
+
+state 12
+
+    (3) statement -> PRINT LPAREN STRING . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 22
+
+
+state 13
+
+    (18) factor -> IDENTIFIER .
+
+    MULTIPLY        reduce using rule 18 (factor -> IDENTIFIER .)
+    DIVIDE          reduce using rule 18 (factor -> IDENTIFIER .)
+    SEMICOLON       reduce using rule 18 (factor -> IDENTIFIER .)
+    PLUS            reduce using rule 18 (factor -> IDENTIFIER .)
+    MINUS           reduce using rule 18 (factor -> IDENTIFIER .)
+    GREATER         reduce using rule 18 (factor -> IDENTIFIER .)
+    LESS            reduce using rule 18 (factor -> IDENTIFIER .)
+    RPAREN          reduce using rule 18 (factor -> IDENTIFIER .)
+
+
+state 14
+
+    (4) statement -> IDENTIFIER EQUAL expression . SEMICOLON
+    (7) expression -> expression . PLUS term
+    (8) expression -> expression . MINUS term
+    (12) expression -> expression . GREATER expression
+    (13) expression -> expression . LESS expression
+
+    SEMICOLON       shift and go to state 23
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 25
+    GREATER         shift and go to state 26
+    LESS            shift and go to state 27
+
+
+state 15
+
+    (9) expression -> term .
+    (14) term -> term . MULTIPLY factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 9 (expression -> term .)
+    PLUS            reduce using rule 9 (expression -> term .)
+    MINUS           reduce using rule 9 (expression -> term .)
+    GREATER         reduce using rule 9 (expression -> term .)
+    LESS            reduce using rule 9 (expression -> term .)
+    RPAREN          reduce using rule 9 (expression -> term .)
+    MULTIPLY        shift and go to state 28
+    DIVIDE          shift and go to state 29
+
+
+state 16
+
+    (10) expression -> TRUE .
+
+    SEMICOLON       reduce using rule 10 (expression -> TRUE .)
+    PLUS            reduce using rule 10 (expression -> TRUE .)
+    MINUS           reduce using rule 10 (expression -> TRUE .)
+    GREATER         reduce using rule 10 (expression -> TRUE .)
+    LESS            reduce using rule 10 (expression -> TRUE .)
+    RPAREN          reduce using rule 10 (expression -> TRUE .)
+
+
+state 17
+
+    (11) expression -> FALSE .
+
+    SEMICOLON       reduce using rule 11 (expression -> FALSE .)
+    PLUS            reduce using rule 11 (expression -> FALSE .)
+    MINUS           reduce using rule 11 (expression -> FALSE .)
+    GREATER         reduce using rule 11 (expression -> FALSE .)
+    LESS            reduce using rule 11 (expression -> FALSE .)
+    RPAREN          reduce using rule 11 (expression -> FALSE .)
+
+
+state 18
+
+    (16) term -> factor .
+
+    MULTIPLY        reduce using rule 16 (term -> factor .)
+    DIVIDE          reduce using rule 16 (term -> factor .)
+    SEMICOLON       reduce using rule 16 (term -> factor .)
+    PLUS            reduce using rule 16 (term -> factor .)
+    MINUS           reduce using rule 16 (term -> factor .)
+    GREATER         reduce using rule 16 (term -> factor .)
+    LESS            reduce using rule 16 (term -> factor .)
+    RPAREN          reduce using rule 16 (term -> factor .)
+
+
+state 19
+
+    (17) factor -> NUMBER .
+
+    MULTIPLY        reduce using rule 17 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 17 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 17 (factor -> NUMBER .)
+    PLUS            reduce using rule 17 (factor -> NUMBER .)
+    MINUS           reduce using rule 17 (factor -> NUMBER .)
+    GREATER         reduce using rule 17 (factor -> NUMBER .)
+    LESS            reduce using rule 17 (factor -> NUMBER .)
+    RPAREN          reduce using rule 17 (factor -> NUMBER .)
+
+
+state 20
+
+    (5) statement -> IF LPAREN expression . RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (7) expression -> expression . PLUS term
+    (8) expression -> expression . MINUS term
+    (12) expression -> expression . GREATER expression
+    (13) expression -> expression . LESS expression
+
+    RPAREN          shift and go to state 30
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 25
+    GREATER         shift and go to state 26
+    LESS            shift and go to state 27
+
+
+state 21
+
+    (6) statement -> LOOP LPAREN NUMBER . RPAREN LBRACE program RBRACE
+
+    RPAREN          shift and go to state 31
+
+
+state 22
+
+    (3) statement -> PRINT LPAREN STRING RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 32
+
+
+state 23
+
+    (4) statement -> IDENTIFIER EQUAL expression SEMICOLON .
+
+    PRINT           reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+    IDENTIFIER      reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+    IF              reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+    LOOP            reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+    $end            reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+    RBRACE          reduce using rule 4 (statement -> IDENTIFIER EQUAL expression SEMICOLON .)
+
+
+state 24
+
+    (7) expression -> expression PLUS . term
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    term                           shift and go to state 33
+    factor                         shift and go to state 18
+
+state 25
+
+    (8) expression -> expression MINUS . term
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    term                           shift and go to state 34
+    factor                         shift and go to state 18
+
+state 26
+
+    (12) expression -> expression GREATER . expression
+    (7) expression -> . expression PLUS term
+    (8) expression -> . expression MINUS term
+    (9) expression -> . term
+    (10) expression -> . TRUE
+    (11) expression -> . FALSE
+    (12) expression -> . expression GREATER expression
+    (13) expression -> . expression LESS expression
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    TRUE            shift and go to state 16
+    FALSE           shift and go to state 17
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 35
+    term                           shift and go to state 15
+    factor                         shift and go to state 18
+
+state 27
+
+    (13) expression -> expression LESS . expression
+    (7) expression -> . expression PLUS term
+    (8) expression -> . expression MINUS term
+    (9) expression -> . term
+    (10) expression -> . TRUE
+    (11) expression -> . FALSE
+    (12) expression -> . expression GREATER expression
+    (13) expression -> . expression LESS expression
+    (14) term -> . term MULTIPLY factor
+    (15) term -> . term DIVIDE factor
+    (16) term -> . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    TRUE            shift and go to state 16
+    FALSE           shift and go to state 17
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    expression                     shift and go to state 36
+    term                           shift and go to state 15
+    factor                         shift and go to state 18
+
+state 28
+
+    (14) term -> term MULTIPLY . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    factor                         shift and go to state 37
+
+state 29
+
+    (15) term -> term DIVIDE . factor
+    (17) factor -> . NUMBER
+    (18) factor -> . IDENTIFIER
+
+    NUMBER          shift and go to state 19
+    IDENTIFIER      shift and go to state 13
+
+    factor                         shift and go to state 38
+
+state 30
+
+    (5) statement -> IF LPAREN expression RPAREN . LBRACE program RBRACE ELSE LBRACE program RBRACE
+
+    LBRACE          shift and go to state 39
+
+
+state 31
+
+    (6) statement -> LOOP LPAREN NUMBER RPAREN . LBRACE program RBRACE
+
+    LBRACE          shift and go to state 40
+
+
+state 32
+
+    (3) statement -> PRINT LPAREN STRING RPAREN SEMICOLON .
+
+    PRINT           reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    IDENTIFIER      reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    IF              reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    LOOP            reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    $end            reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+    RBRACE          reduce using rule 3 (statement -> PRINT LPAREN STRING RPAREN SEMICOLON .)
+
+
+state 33
+
+    (7) expression -> expression PLUS term .
+    (14) term -> term . MULTIPLY factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 7 (expression -> expression PLUS term .)
+    PLUS            reduce using rule 7 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 7 (expression -> expression PLUS term .)
+    GREATER         reduce using rule 7 (expression -> expression PLUS term .)
+    LESS            reduce using rule 7 (expression -> expression PLUS term .)
+    RPAREN          reduce using rule 7 (expression -> expression PLUS term .)
+    MULTIPLY        shift and go to state 28
+    DIVIDE          shift and go to state 29
+
+
+state 34
+
+    (8) expression -> expression MINUS term .
+    (14) term -> term . MULTIPLY factor
+    (15) term -> term . DIVIDE factor
+
+    SEMICOLON       reduce using rule 8 (expression -> expression MINUS term .)
+    PLUS            reduce using rule 8 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 8 (expression -> expression MINUS term .)
+    GREATER         reduce using rule 8 (expression -> expression MINUS term .)
+    LESS            reduce using rule 8 (expression -> expression MINUS term .)
+    RPAREN          reduce using rule 8 (expression -> expression MINUS term .)
+    MULTIPLY        shift and go to state 28
+    DIVIDE          shift and go to state 29
+
+
+state 35
+
+    (12) expression -> expression GREATER expression .
+    (7) expression -> expression . PLUS term
+    (8) expression -> expression . MINUS term
+    (12) expression -> expression . GREATER expression
+    (13) expression -> expression . LESS expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    SEMICOLON       reduce using rule 12 (expression -> expression GREATER expression .)
+    RPAREN          reduce using rule 12 (expression -> expression GREATER expression .)
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 25
+    GREATER         shift and go to state 26
+    LESS            shift and go to state 27
+
+  ! PLUS            [ reduce using rule 12 (expression -> expression GREATER expression .) ]
+  ! MINUS           [ reduce using rule 12 (expression -> expression GREATER expression .) ]
+  ! GREATER         [ reduce using rule 12 (expression -> expression GREATER expression .) ]
+  ! LESS            [ reduce using rule 12 (expression -> expression GREATER expression .) ]
+
+
+state 36
+
+    (13) expression -> expression LESS expression .
+    (7) expression -> expression . PLUS term
+    (8) expression -> expression . MINUS term
+    (12) expression -> expression . GREATER expression
+    (13) expression -> expression . LESS expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+    SEMICOLON       reduce using rule 13 (expression -> expression LESS expression .)
+    RPAREN          reduce using rule 13 (expression -> expression LESS expression .)
+    PLUS            shift and go to state 24
+    MINUS           shift and go to state 25
+    GREATER         shift and go to state 26
+    LESS            shift and go to state 27
+
+  ! PLUS            [ reduce using rule 13 (expression -> expression LESS expression .) ]
+  ! MINUS           [ reduce using rule 13 (expression -> expression LESS expression .) ]
+  ! GREATER         [ reduce using rule 13 (expression -> expression LESS expression .) ]
+  ! LESS            [ reduce using rule 13 (expression -> expression LESS expression .) ]
+
+
+state 37
+
+    (14) term -> term MULTIPLY factor .
+
+    MULTIPLY        reduce using rule 14 (term -> term MULTIPLY factor .)
+    DIVIDE          reduce using rule 14 (term -> term MULTIPLY factor .)
+    SEMICOLON       reduce using rule 14 (term -> term MULTIPLY factor .)
+    PLUS            reduce using rule 14 (term -> term MULTIPLY factor .)
+    MINUS           reduce using rule 14 (term -> term MULTIPLY factor .)
+    GREATER         reduce using rule 14 (term -> term MULTIPLY factor .)
+    LESS            reduce using rule 14 (term -> term MULTIPLY factor .)
+    RPAREN          reduce using rule 14 (term -> term MULTIPLY factor .)
+
+
+state 38
+
+    (15) term -> term DIVIDE factor .
+
+    MULTIPLY        reduce using rule 15 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 15 (term -> term DIVIDE factor .)
+    SEMICOLON       reduce using rule 15 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 15 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 15 (term -> term DIVIDE factor .)
+    GREATER         reduce using rule 15 (term -> term DIVIDE factor .)
+    LESS            reduce using rule 15 (term -> term DIVIDE factor .)
+    RPAREN          reduce using rule 15 (term -> term DIVIDE factor .)
+
+
+state 39
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE . program RBRACE ELSE LBRACE program RBRACE
+    (1) program -> . statement
+    (2) program -> . statement program
+    (3) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (4) statement -> . IDENTIFIER EQUAL expression SEMICOLON
+    (5) statement -> . IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (6) statement -> . LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    PRINT           shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    IF              shift and go to state 5
+    LOOP            shift and go to state 6
+
+    program                        shift and go to state 41
+    statement                      shift and go to state 2
+
+state 40
+
+    (6) statement -> LOOP LPAREN NUMBER RPAREN LBRACE . program RBRACE
+    (1) program -> . statement
+    (2) program -> . statement program
+    (3) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (4) statement -> . IDENTIFIER EQUAL expression SEMICOLON
+    (5) statement -> . IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (6) statement -> . LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    PRINT           shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    IF              shift and go to state 5
+    LOOP            shift and go to state 6
+
+    program                        shift and go to state 42
+    statement                      shift and go to state 2
+
+state 41
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program . RBRACE ELSE LBRACE program RBRACE
+
+    RBRACE          shift and go to state 43
+
+
+state 42
+
+    (6) statement -> LOOP LPAREN NUMBER RPAREN LBRACE program . RBRACE
+
+    RBRACE          shift and go to state 44
+
+
+state 43
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program RBRACE . ELSE LBRACE program RBRACE
+
+    ELSE            shift and go to state 45
+
+
+state 44
+
+    (6) statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .
+
+    PRINT           reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+    IDENTIFIER      reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+    IF              reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+    LOOP            reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+    $end            reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+    RBRACE          reduce using rule 6 (statement -> LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE .)
+
+
+state 45
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE . LBRACE program RBRACE
+
+    LBRACE          shift and go to state 46
+
+
+state 46
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE . program RBRACE
+    (1) program -> . statement
+    (2) program -> . statement program
+    (3) statement -> . PRINT LPAREN STRING RPAREN SEMICOLON
+    (4) statement -> . IDENTIFIER EQUAL expression SEMICOLON
+    (5) statement -> . IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE
+    (6) statement -> . LOOP LPAREN NUMBER RPAREN LBRACE program RBRACE
+
+    PRINT           shift and go to state 3
+    IDENTIFIER      shift and go to state 4
+    IF              shift and go to state 5
+    LOOP            shift and go to state 6
+
+    program                        shift and go to state 47
+    statement                      shift and go to state 2
+
+state 47
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program . RBRACE
+
+    RBRACE          shift and go to state 48
+
+
+state 48
+
+    (5) statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .
+
+    PRINT           reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+    IDENTIFIER      reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+    IF              reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+    LOOP            reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+    $end            reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+    RBRACE          reduce using rule 5 (statement -> IF LPAREN expression RPAREN LBRACE program RBRACE ELSE LBRACE program RBRACE .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 35 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 35 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 35 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 35 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 36 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 36 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 36 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 36 resolved as shift
